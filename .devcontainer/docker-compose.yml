@@ -44,7 +44,7 @@ services:
     command: [ "sh", "-c", "nodemon index.js" ]
     volumes:
       - ../listener:/app
-    env_file: .env
+    env_file: ../listener/.env
     networks:
       - default
 
