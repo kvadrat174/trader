@@ -1,0 +1,23 @@
+{
+  "name": "trader dev container",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "base",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "git.ignoreLimitWarning": true,
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.resolveGlobalModules": true,
+    "prettier.printWidth": 120
+  },
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens"
+  ]
+}

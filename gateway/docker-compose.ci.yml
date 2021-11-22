@@ -1,0 +1,17 @@
+version: '2.4'
+services:
+  gateway:
+    image: $CI_REGISTRY_IMAGE/gateway:latest
+    networks:
+      - app
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gateway.rule=Host(`api-lehnibou-qa.lehibou.com`)"
+      - "traefik.http.routers.gateway.entrypoints=web"
+
+
+networks:
+  app:
+    external:
+      name: app
+
