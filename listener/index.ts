@@ -27,14 +27,14 @@ class Listener {
     tenMinutes: Array<string>
     fiveMinutes: Array<string>
     lastMinute: Array<string>
-    observers: Array<string>
+    observers: any
 
     constructor(symbols: Array<string>) {
         this.symbols = symbols
         this.symbolHistory = {}
         this.percentChange = {}
         this.fiveMinutes = []
-        this.observers = []
+        this.observers = {}
         this.tenMinutes = []
         this.lastMinute = []
     }
@@ -146,10 +146,10 @@ class Listener {
 
     calculateObservers() {
         let observerSymbols = this.observers
-        let newObservers = []
+        let newObservers = {}
         for (let symbol of this.lastMinute) {
             if (this.tenMinutes.includes(symbol) && this.fiveMinutes.includes(symbol)) {
-                newObservers.push(symbol)
+                newObservers[symbol] = this.percentChange[symbol]
             }
         }
         return newObservers
@@ -175,7 +175,8 @@ async function chartCall() {
         // let ohlc = binance.ohlc(chart);
         // console.info(chart);
         symbolsListener.addStat(chart, symbol)
-        broadcastMessage(symbolsListener.lastMinute.join('|'));
+        //console.log(symbolsListener.lastMinute)
+        broadcastMessage(JSON.stringify(symbolsListener.observers));
 
 
     }, 25);

@@ -67,7 +67,7 @@ var Listener = /** @class */ (function () {
         this.symbolHistory = {};
         this.percentChange = {};
         this.fiveMinutes = [];
-        this.observers = [];
+        this.observers = {};
         this.tenMinutes = [];
         this.lastMinute = [];
     }
@@ -161,11 +161,11 @@ var Listener = /** @class */ (function () {
     };
     Listener.prototype.calculateObservers = function () {
         var observerSymbols = this.observers;
-        var newObservers = [];
+        var newObservers = {};
         for (var _i = 0, _a = this.lastMinute; _i < _a.length; _i++) {
             var symbol = _a[_i];
             if (this.tenMinutes.includes(symbol) && this.fiveMinutes.includes(symbol)) {
-                newObservers.push(symbol);
+                newObservers[symbol] = this.percentChange[symbol];
             }
         }
         return newObservers;
@@ -199,7 +199,8 @@ function chartCall() {
                             // let ohlc = binance.ohlc(chart);
                             // console.info(chart);
                             symbolsListener.addStat(chart, symbol);
-                            broadcastMessage(symbolsListener.lastMinute.join('|'));
+                            //console.log(symbolsListener.lastMinute)
+                            broadcastMessage(JSON.stringify(symbolsListener.observers));
                             return [2 /*return*/];
                         });
                     }); }, 25);
