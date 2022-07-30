@@ -1,7 +1,7 @@
 //const config = require('../config/index');
 const redis = require("redis");
 const RedisClient = redis.createClient({
-  host: "redis",
+  host: "localhost",
   port: 6379,
 });
 const { promisify } = require("util");

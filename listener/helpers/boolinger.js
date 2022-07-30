@@ -2,6 +2,7 @@ const boll = require("bollinger-bands");
 const axios = require("axios");
 const { redisGetAsync, redisSetAsync } = require("./redis");
 const { Telegraf } = require('telegraf')
+require('dotenv').config()
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
@@ -58,5 +59,9 @@ async function trading(last, trade, symbol) {
 
 }
 
+async function sendTelegram(str) {
+    await bot.telegram.sendMessage('@PahaNakrutka', `${str}`)
+}
 
-module.exports = { callBollinger, makeOrder }
+
+module.exports = { callBollinger, makeOrder, sendTelegram }
